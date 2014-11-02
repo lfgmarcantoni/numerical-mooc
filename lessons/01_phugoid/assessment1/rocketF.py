@@ -3,7 +3,7 @@ import numpy as np
 assessment 1
 course: Practical Numerical Methods with Python
 year: 2014
-by: Luis F. Gutiérrez
+by: Luis F. Gutierrez
 Description: 
 Solve the rocket equation model for purely verical flight. 
 """
@@ -50,15 +50,47 @@ for i in range(0,h.size):
         if (v[i]<0.0):
 	      print 'max alt time',times[i-1]
               print 'max alt',h[i-1]
+              hmax=h[i-1]
+	      thmax=times[i-1]
               break
 for i in range(0,h.size):
         if(times[i]>5.0)&(h[i]<0.03):
         	print 'imp time',times[i]
-                print 'imp velocity',v[i] 
+                print 'imp velocity',v[i]
+		impv=v[i]
+		impt=times[i]
 	        break
 
+import matplotlib.pyplot as plt
+
+plt.figure(1)
+plt.title('altitude')
+plt.plot(times,h)
+plt.xlabel('time[s]')
+plt.ylabel('h[m]')
+
+plt.annotate('hmax= %s'%hmax, xy=(thmax, hmax),  xycoords='data',
+                xytext=(15,15), textcoords='offset points',
+                arrowprops=dict(arrowstyle="->")
+                )
+
+plt.annotate('imp vel time= %s'%impv, xy=(impt, impv),  xycoords='data',
+                xytext=(15,15), textcoords='offset points',
+                arrowprops=dict(arrowstyle="->")
+                )
 
 
+plt.figure(2)
+plt.title('velocity')
+plt.plot(times,v)
+plt.xlabel('time[s]')
+plt.ylabel('v[m]')
 
 
+plt.figure(3)
+plt.title('velocity vs. altitude')
+plt.plot(h,v)
+plt.xlabel('h')
+plt.ylabel('v[m]')
 
+plt.show()
